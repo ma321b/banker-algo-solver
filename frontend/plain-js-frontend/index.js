@@ -34,10 +34,10 @@ function renderInputMatrix(procNum, resNum) {
                 // k for each resource type
                 if (j === 0) {
                     // the name of the form is alloc_processNum_resourceTypeNum
-                    table += `<td><input type="text" size="2" name="alloc_${i}_${k}" onkeyup="moveToNextRow()"></td>`;
+                    table += `<td><input type="text" size="2" id="${i}_${j}_${k}" name="alloc_${i}_${k}" onkeyup="autoMoveToNextField('${i}_${j}_${k}', ${procNum}, ${resNum})"></td>`;
                 } else if (j === 1) {
                     // the name of the form is maxm_processNum_resourceTypeNum
-                    table += `<td><input type="text" size="2" name="maxm_${i}_${k}" onkeyup="moveToNextRow()"></td>`;
+                    table += `<td><input type="text" size="2" id="${i}_${j}_${k}" name="maxm_${i}_${k}" onkeyup="autoMoveToNextField('${i}_${j}_${k}', ${procNum}, ${resNum})"></td>`;
                 }
             }
         }
@@ -50,11 +50,41 @@ function renderInputMatrix(procNum, resNum) {
 }
 
 // move cursor to the next form field (handling onkeyup event)
-function moveToNextRow(given, maxm) {
-    // will need some implecmentation of focus() apparently
+function autoMoveToNextField(given, procs, resNum) {
+    // will need some implementation of focus() apparently
+    let split_id = given.split('_'); // first elem -> processNum, second -> j value (max or alloc), third -> resNum value
+    let nextProc = split_id[0];
+    let nextCol = split_id[1];
+    let nextRes = split_id[2];
+
+    if (nextCol == 1) {
+        if (nextRes == resNum - 1) {
+            // move to first field of the row
+            nextCol = 0;
+            nextProc++;
+            nextRes = 0;
+        } else {
+            nextRes++;
+        }
+    } else {
+        if (nextRes == resNum - 1) {
+            // move to first field of the row
+            nextCol = 1;
+            nextRes = 0;
+        } else {
+            nextRes++;
+        }
+    }
+
+    if (nextProc >= procs) {
+        return; // do nothing
+    }
+
+    console.log(nextProc + "_" + nextCol + "_" + nextRes);
+    document.getElementById(nextProc + "_" + nextCol + "_" + nextRes).focus();
 }
 
-// returns the form to get the data field
+// @return the form to get the data field
 function renderAvailable(procNum, resNum) {
 
 }
