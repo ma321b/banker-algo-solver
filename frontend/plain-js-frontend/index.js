@@ -43,10 +43,13 @@ function renderInputMatrix(procNum, resNum) {
         }
         table += "</tr>";
     }
-    table += "</table>\n\n\n";
-    let button = `<button onClick="onCalcClicked()">Calculate</button>`;
+    table += "</table><br /><br /><br />";
+    let button = `<button onClick="onCalcClicked(${procNum}, ${resNum})">Calculate</button>`;
     table += button;
-    document.getElementById("main-pg").innerHTML = table;
+
+    let toRenderFinal = renderAvailable(procNum, resNum);
+    toRenderFinal += table;
+    document.getElementById("main-pg").innerHTML = toRenderFinal;
 }
 
 // move cursor to the next form field (handling onkeyup event)
@@ -84,12 +87,35 @@ function autoMoveToNextField(given, procs, resNum) {
     document.getElementById(nextProc + "_" + nextCol + "_" + nextRes).focus();
 }
 
-// @return the form to get the data field
+// @return the form to get the available data field
 function renderAvailable(procNum, resNum) {
-
+    return(
+        `<label for="avail">Available values initial (separated by space):</label>
+         <input type="text" name="avail" id="avail"><br /><br /><br />`
+    )
 }
 
 // send data to server and render the response 
-function onCalcClicked() {
+function onCalcClicked(procNum, resNum) {
+    let allocation = [];
+    let maxm = [];
+    let available = document.getElementById("avail").value.split(' ');
+    available = available.map(x => parseInt(x))
 
+    for (let i = 0; i < procNum; i++) {
+        let alloc_sub = [];
+        let maxm_sub = [];
+        for (let j = 0; j < resNum; j++) {
+            let alloc_val = parseInt(document.getElementById(`${i}_0_${j}`).value);
+            let maxm_val = parseInt(document.getElementById(`${i}_1_${j}`).value);
+            alloc_sub.push(alloc_val);
+            maxm_sub.push(maxm_val);
+        }
+        allocation.push(alloc_sub);
+        maxm.push(maxm_sub);
+    }
+
+    console.log(allocation);
+    console.log(maxm);
+    console.log(available);
 }

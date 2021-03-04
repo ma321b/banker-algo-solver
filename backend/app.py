@@ -1,9 +1,14 @@
-from flask import Flask
+from flask import Flask, request
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello():
+@app.route('/banker', methods=['POST'])
+def calculate():
+    req_data = request.get_json()
+    
+
+
+
     return "Hello World!"
 
 if __name__ == '__main__':
