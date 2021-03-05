@@ -1,6 +1,7 @@
 # Banker's Algorithm Solver
 
-Solves the Banker's algorithm problems arising in the Operating Systems to determine if a system state is safe. 
+Solves the Banker's algorithm problems arising in the Operating Systems to determine if a system state is safe.
+The app is currently live on http://banker-algo.herokuapp.com/
 
 ## Tech stack:
 * Flask for backend
