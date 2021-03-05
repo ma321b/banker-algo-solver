@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def welcome_page():
-    return render_template('../frontend/index.html')
+    return render_template('./frontend/index.html')
 
 @app.route('/banker', methods=['POST', 'OPTIONS'])
 def calculate():

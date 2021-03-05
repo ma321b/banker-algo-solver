@@ -125,20 +125,7 @@ function onCalcClicked(procNum, resNum) {
     bodyParam.available = available;
 
     console.log(JSON.stringify(bodyParam));
-    let url = 'http://localhost:5000/banker';
-
-    // (async () => {
-    //     const response = await fetch(url, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(bodyParam)
-    //     });
-    //     const content = await response.json();
-    //     console.log(content);
-    // })();
+    let url = 'http://banker-algo.herokuapp.com/banker';
 
     fetch(url, {
         method: 'POST',
