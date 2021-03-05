@@ -1,10 +1,10 @@
 # Banker's Algorithm Solver
 
-Solves the Banker's algorithm problems arising in the Operating Systems to determine if a state is safe. 
+Solves the Banker's algorithm problems arising in the Operating Systems to determine if a system state is safe. 
 
 ## Tech stack:
 * Flask for backend
-* React for frontend
+* Plain JavaScript for frontend
 * Deployment on heroku free tier
 
 # Disclaimer
