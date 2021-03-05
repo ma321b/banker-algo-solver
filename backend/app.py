@@ -1,7 +1,11 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, render_template
 import flask
 app = Flask(__name__)
 
+
+@app.route('/')
+def welcome_page:
+    return render_template('../frontend/index.html')
 
 @app.route('/banker', methods=['POST', 'OPTIONS'])
 def calculate():
