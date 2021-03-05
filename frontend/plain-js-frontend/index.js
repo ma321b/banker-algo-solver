@@ -147,7 +147,28 @@ function onCalcClicked(procNum, resNum) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(bodyParam)
-    }).then(
-        response => console.log(response.text())
-    );
+    })
+    .then(response => response.json())
+    .then(data => displayResult(data['result']));
+}
+
+function displayResult(response) {
+    let toRender = "<h1>" + response + "</h1><br /><br /><br />"
+    toRender += `<button onClick="renderNew()">Calculate again</button>`
+    document.getElementById("main-pg").innerHTML = toRender;
+}
+
+function renderNew() {
+    document.getElementById("main-pg").innerHTML = `
+        <h1>Banker's Algorithm solver</h1>
+        <br />
+        <br />
+        <label for="procs">How many processes?</label>
+        <input id ="procNum" name="procs" type="text"></input><br /><br />
+        <label for="res">How many resoure types?</label>
+        <input id="resNum" name="res" type="text"></input><br /><br />
+        <button onClick="onGoClicked()">
+            GO!
+        </button>
+    `
 }
