@@ -118,4 +118,36 @@ function onCalcClicked(procNum, resNum) {
     console.log(allocation);
     console.log(maxm);
     console.log(available);
+
+    let bodyParam = {};
+    bodyParam.allocation = allocation;
+    bodyParam.maxm = maxm;
+    bodyParam.available = available;
+
+    console.log(JSON.stringify(bodyParam));
+    let url = 'http://localhost:5000/banker';
+
+    // (async () => {
+    //     const response = await fetch(url, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(bodyParam)
+    //     });
+    //     const content = await response.json();
+    //     console.log(content);
+    // })();
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bodyParam)
+    }).then(
+        response => console.log(response.text())
+    );
 }
