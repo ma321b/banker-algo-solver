@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response, render_template
 import flask
-app = Flask(__name__, template_folder='frontend')
+app = Flask(__name__)
 
 
 @app.route('/')
